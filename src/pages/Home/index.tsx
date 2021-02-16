@@ -1,10 +1,9 @@
-import { fromPairs } from 'lodash';
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground, Image, LogBox } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { useNavigation } from '@react-navigation/native';
 
-import { PriceAlert } from '../../components';
+import { PriceAlert, TransactionHistory } from '../../components';
 import {
   dummyData,
   COLORS,
@@ -17,9 +16,15 @@ import {
 const Home = () => {
 
   const [trending, setTrending] = useState(dummyData.trendingCurrencies)
+  const [transactionHistory, setTransactionHistory] = useState(dummyData.transactionHistory)
 
+  useEffect(() => {
+    LogBox.ignoreLogs([''])
+  }, [])
 
   function renderHeader() { 
+
+    const navigation = useNavigation()
     
     const renderItem = ({item, index}) => (
       <TouchableOpacity 
@@ -31,6 +36,7 @@ const Home = () => {
         marginRight: SIZES.radius, 
         borderRadius: 10,
         backgroundColor: COLORS.white }}
+        onPress={() => navigation.navigate("CryptoDetail")}
       >
 
         <View style={{flexDirection: 'row'}}>
@@ -93,7 +99,7 @@ const Home = () => {
 
           {/* Trending */}
 
-          <View style={{ position: 'absolute', bottom: "-30%"}}>
+          <View style={{ position: 'absolute', bottom: '-30%'}}>
               <Text style={{marginLeft: SIZES.padding, color: COLORS.white, ...FONTS.h2}}>Trending</Text>
               <FlatList 
                 contentContainerStyle={{marginTop: SIZES.base}}
@@ -115,11 +121,44 @@ const Home = () => {
     );
   }
 
+  function renderNotice() {
+    return (
+      <View style={{
+        marginTop: SIZES.padding,
+        marginHorizontal: SIZES.padding,
+        padding: 20,
+        borderRadius: SIZES.radius,
+        backgroundColor: COLORS.secondary,
+        ...styles.shadow
+      }}>
+        <Text style={{ color: COLORS.white, ...FONTS.h3}}>Investimento Seguro</Text>
+        <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.body4, lineHeight: 18 }}>É muito difícil cronometrar investimento, especialmente quando o mercado é volátil. Aprenda como usar o custo médio para seu dinheiro.</Text>
+        <TouchableOpacity style={{ marginTop: SIZES.base}} onPress={() => {}}>
+          <Text style={{ textDecorationLine: 'underline', color: COLORS.green, ...FONTS.h3}}>
+            Aprenda mais
+          </Text>
+        </TouchableOpacity>
+      </View>
+      
+    )
+  }
+
+  function renderTransactionHistory() {
+    return (
+      <TransactionHistory 
+        customContainerStyle={{ ...styles.shadow}}
+        history={transactionHistory}
+      />
+    )
+  }
+
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingBottom: 130 }}>
         {renderHeader()}
-        {renderAlert()}        
+        {renderAlert()}   
+        {renderNotice()}
+        {renderTransactionHistory()}
       </View>
     </ScrollView>
   );

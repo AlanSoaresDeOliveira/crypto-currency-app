@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, Image, View, Text} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { COLORS, SIZES, FONTS, icons} from '../constants';
 
-const PriceAlert = ({ customContainerStyles}) => {
+const PriceAlert = ({ customContainerStyles }) => {
   return (
     <TouchableOpacity 
       style={{
@@ -18,7 +17,7 @@ const PriceAlert = ({ customContainerStyles}) => {
         backgroundColor: COLORS.white,
         borderRadius: SIZES.radius,
         ...customContainerStyles,
-        ...styles.shadow
+        ...styles.shadow,
       }}
     >
       <Image 
