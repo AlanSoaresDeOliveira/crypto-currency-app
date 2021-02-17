@@ -10,7 +10,7 @@ const HeaderBar = ({ right }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row'}}>
+    <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row', marginTop: 15}}>
       <View style={{ flex: 1, alignItems: 'flex-start'}}>
         <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center'}} onPress={() => navigation.goBack()}>
           <Image source={icons.back_arrow} resizeMode="contain" style={{ width: 25, height: 25, tintColor: COLORS.gray}}/>

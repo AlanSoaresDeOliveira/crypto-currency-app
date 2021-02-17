@@ -6,7 +6,7 @@ import { COLORS, SIZES, FONTS, icons} from '../constants';
 
 const PriceAlert = ({ customContainerStyles }) => {
   return (
-    <TouchableOpacity 
+    <View 
       style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -36,7 +36,7 @@ const PriceAlert = ({ customContainerStyles }) => {
       <Image source={icons.right_arrow} style={{ width: 24, height: 25, tintColor: COLORS.gray}}/>
 
 
-    </TouchableOpacity>
+    </View>
   )
 }
 

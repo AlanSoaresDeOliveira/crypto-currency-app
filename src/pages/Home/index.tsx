@@ -36,7 +36,7 @@ const Home = () => {
         marginRight: SIZES.radius, 
         borderRadius: 10,
         backgroundColor: COLORS.white }}
-        onPress={() => navigation.navigate("CryptoDetail")}
+        onPress={() => navigation.navigate("CryptoDetail", { currency: item})}
       >
 
         <View style={{flexDirection: 'row'}}>
